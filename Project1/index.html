@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DecodeLabs — Static Webpage Design</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER COMPONENT (HEADER_NAV_01) -->
+  <header class="header">
+    <div class="header__container">
+      <div class="header__logo">
+        <a href="#" class="header__logo-link">DecodeLabs</a>
+      </div>
+      <nav class="nav" aria-label="Main Navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#" class="nav__link nav__link--active">Home</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Services</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main">
+
+    <!-- HERO SECTION -->
+    <section class="hero hero-container" aria-labelledby="main-headline">
+      <div class="hero__content">
+        <h1 id="main-headline" class="hero__title">Foundations of Visual Architecture</h1>
+        <p class="hero__subtitle">Mastering semantic integrity, CSS engineering, and layout structures for modern static web development.</p>
+        <a href="#content-grid" class="button button--primary hero__cta">Call To Action</a>
+      </div>
+    </section>
+
+    <!-- CONTENT GRID SECTION -->
+    <section id="content-grid" class="content-grid hont-cooles" aria-labelledby="grid-heading">
+      <div class="content-grid__header">
+        <h2 id="grid-heading" class="content-grid__title">Module Architecture & Visual Memory</h2>
+      </div>
+
+      <div class="content-grid__container">
+        <!-- Module Card 1 -->
+        <article class="card">
+          <picture class="card__image-container">
+            <source srcset="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80" type="image/webp">
+            <img class="card__image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80" width="278" height="180" alt="Laptop showing code development environment" loading="lazy">
+          </picture>
+          <div class="card__body">
+            <h3 class="card__title">Semantic Structure</h3>
+            <p class="card__text">Ensuring explicit meaning and structural integrity across browsers and screen readers.</p>
+          </div>
+        </article>
+
+        <!-- Module Card 2 -->
+        <article class="card">
+          <picture class="card__image-container">
+            <source srcset="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=80" type="image/webp">
+            <img class="card__image" src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=80" width="278" height="180" alt="Designer organizing website design blueprints" loading="lazy">
+          </picture>
+          <div class="card__body">
+            <h3 class="card__title">Information Architecture</h3>
+            <p class="card__text">Structuring data into clear, findable, and usable systems according to core UX principles.</p>
+          </div>
+        </article>
+
+        <!-- Module Card 3 -->
+        <article class="card">
+          <picture class="card__image-container">
+            <source srcset="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80" type="image/webp">
+            <img class="card__image" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80" width="278" height="180" alt="Code matrices and security layout on screen" loading="lazy">
+          </picture>
+          <div class="card__body">
+            <h3 class="card__title">CSS Engineering</h3>
+            <p class="card__text">Implementing modular styling with BEM methodology and strict separation of concerns.</p>
+          </div>
+        </article>
+
+        <!-- Module Card 4 -->
+        <article class="card">
+          <picture class="card__image-container">
+            <source srcset="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80" type="image/webp">
+            <img class="card__image" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80" width="278" height="180" alt="Clean code editor setup" loading="lazy">
+          </picture>
+          <div class="card__body">
+            <h3 class="card__title">Layout Mechanics</h3>
+            <p class="card__text">Utilizing CSS Grid for macro page layouts and Flexbox for 1D component alignments.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER SECTION -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__info">
+        <h2 class="footer__title">DecodeLabs Industrial Training Kit</h2>
+        <p class="footer__text">Drafting Blue — Internal Engineering Track Phase I</p>
+        <address class="footer__contact">
+          Email: <a href="mailto:decodelabs.tech@gmail.com" class="footer__link">decodelabs.tech@gmail.com</a><br>
+          Phone: <a href="tel:+918933006408" class="footer__link">+91 89330 06408</a><br>
+          Location: Greater Lucknow, India
+        </address>
+      </div>
+      <div class="footer__copyright">
+        <p>&copy; 2026 DecodeLabs. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #1e3a8a;       /* Drafting / Engineering Blue */
+  --color-primary-hover: #1e40af;
+  --color-accent: #0284c7;
+  --color-bg-light: #f8fafc;
+  --color-text-dark: #0f172a;     /* High contrast text (> 4.5:1) */
+  --color-text-muted: #334155;
+  --color-white: #ffffff;
+  
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --max-content-width: 1200px;
+  --gutter: 24px;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ==========================================================================
+   HEADER COMPONENT (.header, COMPONENT_ID: HEADER_NAV_01)
+   ========================================================================== */
+.header {
+  height: 80px;
+  background-color: var(--color-white);
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__container {
+  max-width: var(--max-content-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+/* Navigation System (Rule: < 5 items) */
+.nav__list {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav__link {
+  color: var(--color-text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus,
+.nav__link--active {
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
+   HERO SECTION (.hero-container)
+   ========================================================================== */
+.hero {
+  min-height: 60vh;
+  padding: 120px var(--gutter);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero__content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero__title {
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.hero__subtitle {
+  font-size: 1.25rem;
+  color: #cbd5e1;
+  max-width: 650px;
+}
+
+/* ==========================================================================
+   BUTTON COMPONENT (BEM Rules & DRY Principle)
+   ========================================================================== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.button--primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.button--primary:hover,
+.button--primary:focus {
+  background-color: #0369a1;
+}
+
+/* ==========================================================================
+   CONTENT GRID SECTION (.hont-cooles)
+   Macro Layout: CSS Grid (12-col equivalent container, 24px gutter)
+   Micro Alignment: Flexbox inside modules
+   ========================================================================== */
+.content-grid {
+  max-width: var(--max-content-width);
+  margin: 60px auto;
+  padding: 0 var(--gutter);
+}
+
+.content-grid__header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.content-grid__title {
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+.content-grid__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--gutter);
+}
+
+/* Module Card Component */
+.card {
+  background-color: var(--color-white);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card__image-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.card__title {
+  font-size: 1.25rem;
+  color: var(--color-text-dark);
+}
+
+.card__text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   FOOTER COMPONENT (Drafting Blue, Height: 400px equivalent padding)
+   ========================================================================== */
+.footer {
+  background-color: var(--color-primary);
+  color: #f1f5f9;
+  padding: 80px var(--gutter) 40px;
+  margin-top: auto;
+}
+
+.footer__container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer__title {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--color-white);
+}
+
+.footer__text {
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.footer__contact {
+  font-style: normal;
+  line-height: 1.8;
+  color: #e2e8f0;
+}
+
+.footer__link {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.footer__link:hover,
+.footer__link:focus {
+  text-decoration: underline;
+}
+
+.footer__copyright {
+  border-top: 1px solid #334155;
+  padding-top: 24px;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Mobile First Adjustments)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header__container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero {
+    padding: 60px var(--gutter);
+  }
+}
