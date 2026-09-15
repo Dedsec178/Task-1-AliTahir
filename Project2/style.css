@@ -1,0 +1,421 @@
+/* ==========================================================================
+   1. DESIGN SYSTEM & MODERN CSS RESET
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color Palette */
+  --primary: #0066cc;
+  --primary-hover: #004bb5;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border: #e2e8f0;
+  --accent: #22c55e;
+
+  /* Fluid Typography with clamp() */
+  --font-base: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+  --font-h2: clamp(1.6rem, 1.2rem + 1.8vw, 2.75rem);
+  --font-hero: clamp(2.2rem, 1.5rem + 3vw, 4rem);
+
+  /* Fluid Spacing Scale */
+  --space-xs: clamp(0.5rem, 0.4rem + 0.3vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 0.6rem + 0.5vw, 1.25rem);
+  --space-md: clamp(1.5rem, 1.2rem + 1vw, 2.5rem);
+  --space-lg: clamp(2.5rem, 2rem + 2vw, 5rem);
+
+  --radius: 12px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #090d16;
+    --surface: #111827;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border: #1f2937;
+  }
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  color: var(--text-muted);
+  background-color: var(--bg);
+  overflow-x: hidden;
+}
+
+/* Accessible Touch Target & Focus Rings */
+a, button, input {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   2. NAVIGATION BAR (Flexbox Micro-Layout)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-xs) var(--space-md);
+}
+
+.brand-logo {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo .dot {
+  color: var(--primary);
+}
+
+.nav-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.hamburger-box {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: inline-block;
+}
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
+  position: absolute;
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+.hamburger-inner { top: 50%; transform: translateY(-50%); }
+.hamburger-inner::before { content: ''; top: -7px; }
+.hamburger-inner::after { content: ''; bottom: -7px; }
+
+/* Mobile Menu Popover Drawer */
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: var(--transition);
+}
+
+.nav-menu.is-active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-sm);
+}
+
+.nav-link {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  background-color: var(--bg);
+  color: var(--primary);
+}
+
+.btn-cta {
+  background-color: var(--primary);
+  color: #ffffff !important;
+  justify-content: center;
+  margin-top: var(--space-xs);
+}
+
+/* ==========================================================================
+   3. HERO SECTION
+   ========================================================================== */
+.hero-section {
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 102, 204, 0.08), transparent 70%);
+}
+
+.hero-content {
+  max-width: 850px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.badge {
+  background-color: rgba(0, 102, 204, 0.1);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 102, 204, 0.2);
+}
+
+.hero-title {
+  font-size: var(--font-hero);
+  color: var(--text-main);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hero-description {
+  max-width: 65ch;
+  font-size: var(--font-base);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface);
+  border-color: var(--primary);
+}
+
+/* ==========================================================================
+   4. MACRO GRID LAYOUT
+   ========================================================================== */
+.features-section, .container-query-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.section-title {
+  font-size: var(--font-h2);
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin-bottom: var(--space-xs);
+}
+
+/* ==========================================================================
+   5. BEYOND VIEWPORTS: CONTAINER QUERIES
+   ========================================================================== */
+.interactive-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+/* Define Container contexts */
+.component-container {
+  container-type: inline-size;
+  container-name: card-wrapper;
+  width: 100%;
+}
+
+.adaptive-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.adaptive-card-media {
+  background: linear-gradient(135deg, var(--primary), #3b82f6);
+  min-height: 160px;
+}
+
+.adaptive-card-content {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Modern CSS Container Query Logic */
+@container card-wrapper (min-width: 480px) {
+  .adaptive-card {
+    flex-direction: row;
+    align-items: center;
+  }
+  .adaptive-card-media {
+    width: 40%;
+    min-height: 100%;
+  }
+  .adaptive-card-content {
+    width: 60%;
+  }
+}
+
+/* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+/* ==========================================================================
+   7. MEDIA QUERIES (Breakpoints)
+   ========================================================================== */
+
+/* Tablet Layout Switch (600px+) */
+@media (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop Layout Switch (960px+) */
+@media (min-width: 960px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex !important;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0;
+  }
+
+  .btn-cta {
+    margin-top: 0;
+    margin-left: var(--space-xs);
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .interactive-layout-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}

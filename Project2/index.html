@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Key Requirement: Viewport Tag allowing up to 500% zoom (WCAG Compliant) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DecodeLabs | Advanced Responsive Architecture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Accessible Navigation -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        DecodeLabs<span class="dot">.</span>
+      </a>
+
+      <!-- Accessible Toggle Button -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navMenu">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link">Overview</a></li>
+          <li><a href="#principles" class="nav-link">Architecture</a></li>
+          <li><a href="#showcase" class="nav-link">Container Queries</a></li>
+          <li><a href="#contact" class="nav-link btn-cta">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <span class="badge">Industrial Training Kit 2026</span>
+        <h1 class="hero-title">The Art of Fluidity</h1>
+        <p class="hero-description">
+          Designing responsive architectures from the content out. Content is like water—it adapts seamlessly to any container without structural failure.
+        </p>
+        <div class="hero-actions">
+          <a href="#showcase" class="btn btn-primary">Explore Components</a>
+          <a href="#principles" class="btn btn-secondary">Learn Core Logic</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Macro Layout: CSS Grid Cards -->
+    <section id="principles" class="features-section">
+      <div class="section-header">
+        <h2 class="section-title">Fluid Responsive Principles</h2>
+        <p class="section-subtitle">Combining modern CSS layouts for adaptive UI across all breakpoints.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Fluid Typography</h3>
+          <p class="card-body">Uses CSS clamp() to dynamically scale text sizes relative to viewport width without abrupt steps.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">📐</div>
+          <h3 class="card-title">Macro & Micro Layouts</h3>
+          <p class="card-body">CSS Grid manages full-page section architectures while Flexbox governs interior component alignment.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">♿</div>
+          <h3 class="card-title">Strict Accessibility</h3>
+          <p class="card-body">Compliant with WCAG touch target minimums (44px+) and unrestricted user-controlled zoom.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Component-First Section with Container Queries -->
+    <section id="showcase" class="container-query-section">
+      <div class="section-header">
+        <h2 class="section-title">Beyond Viewports: Container Queries</h2>
+        <p class="section-subtitle">Components that react to their specific parent container size rather than screen width.</p>
+      </div>
+
+      <!-- Container Query Wrapper -->
+      <div class="interactive-layout-grid">
+        <div class="component-container sidebar-slot">
+          <div class="adaptive-card">
+            <div class="adaptive-card-media"></div>
+            <div class="adaptive-card-content">
+              <h3>Sidebar Adaptive Widget</h3>
+              <p>When placed in a narrow container, this element collapses into a clean vertical stacked view.</p>
+              <button class="btn btn-primary">Action</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="component-container main-slot">
+          <div class="adaptive-card">
+            <div class="adaptive-card-media"></div>
+            <div class="adaptive-card-content">
+              <h3>Main Content Adaptive Widget</h3>
+              <p>When given ample inline space, the same component automatically switches into a side-by-side row arrangement via CSS @container queries.</p>
+              <button class="btn btn-primary">Action</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 DecodeLabs. Powered for Frontend Development Track.</p>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    navToggle.addEventListener('click', () => {
+      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', !isExpanded);
+      navMenu.classList.toggle('is-active');
+    });
+
+    // Close mobile nav when clicking outdoor link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('is-active')) {
+          navMenu.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
