@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DecodeLabs Project 3 - Advanced Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <h1 class="header__title">Task Engineer Dashboard</h1>
+      <!-- Decoupled JS hook for state toggling -->
+      <button class="btn btn--secondary js-theme-toggle" aria-label="Toggle Theme">
+        <span class="js-theme-label">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <!-- Input Section (The Sensory Interface) -->
+    <section class="card">
+      <h2 class="card__title">Add New Task</h2>
+      <form class="task-form js-task-form">
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="input js-task-input" 
+            placeholder="Enter task description..." 
+            required 
+          />
+          <button type="submit" class="btn btn--primary">Add Task</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Controls & Analytics Section -->
+    <section class="card card--dashboard">
+      <div class="dashboard-controls">
+        <div class="filter-group js-filter-group">
+          <button class="btn btn--sm btn--filter js-filter-btn is-active" data-filter="all">All</button>
+          <button class="btn btn--sm btn--filter js-filter-btn" data-filter="pending">Pending</button>
+          <button class="btn btn--sm btn--filter js-filter-btn" data-filter="completed">Completed</button>
+        </div>
+        <div class="stats-display">
+          <span>Total: <strong class="js-stat-total">0</strong></span> | 
+          <span>Pending: <strong class="js-stat-pending">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Output Container for Dynamic DOM Nodes -->
+      <div class="task-list-container">
+        <ul class="task-list js-task-list" aria-live="polite"></ul>
+        <p class="empty-state js-empty-state">No tasks found. Create one above to get started!</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
