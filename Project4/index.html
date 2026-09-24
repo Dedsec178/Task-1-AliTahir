@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 4: Form Design & Validation</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 30%, #81d4fa 100%);
+      --card-bg: #ffffff;
+      --primary: #4a7c59;
+      --primary-hover: #3b6347;
+      --error: #e63946;
+      --success: #2a9d8f;
+      --text-dark: #2b2d42;
+      --border-gray: #cccccc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: var(--card-bg);
+      padding: 30px 35px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .form-header {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .form-header h2 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .form-header p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .form-control label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+    }
+
+    .form-control input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--border-gray);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    /* Input State Styles */
+    .form-control.success input {
+      border-color: var(--success);
+    }
+
+    .form-control.error input {
+      border-color: var(--error);
+    }
+
+    .form-control small {
+      color: var(--error);
+      font-size: 0.8rem;
+      margin-top: 4px;
+      display: block;
+      min-height: 18px;
+      visibility: hidden;
+    }
+
+    .form-control.error small {
+      visibility: visible;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Success Banner */
+    .form-alert {
+      padding: 12px;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .form-alert.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <div id="alert" class="form-alert">Registration Successful!</div>
+
+    <div class="form-header">
+      <h2>Create Account</h2>
+      <p>Enter your details below to get started</p>
+    </div>
+
+    <form id="registrationForm" novalidate>
+      <div class="form-control">
+        <label for="username">Full Name</label>
+        <input type="text" id="username" placeholder="e.g. John Doe">
+        <small>Error message</small>
+      </div>
+
+      <div class="form-control">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="e.g. john@example.com">
+        <small>Error message</small>
+      </div>
+
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="At least 6 characters">
+        <small>Error message</small>
+      </div>
+
+      <div class="form-control">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Re-enter password">
+        <small>Error message</small>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const alertBox = document.getElementById('alert');
+
+    // Display error outline and message
+    function showError(input, message) {
+      const formControl = input.parentElement;
+      formControl.className = 'form-control error';
+      const small = formControl.querySelector('small');
+      small.innerText = message;
+    }
+
+    // Display success outline
+    function showSuccess(input) {
+      const formControl = input.parentElement;
+      formControl.className = 'form-control success';
+    }
+
+    // Email pattern check
+    function isValidEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    // Main validation logic
+    function validateForm() {
+      let isValid = true;
+
+      // Name validation
+      if (username.value.trim() === '') {
+        showError(username, 'Full Name is required');
+        isValid = false;
+      } else {
+        showSuccess(username);
+      }
+
+      // Email validation
+      if (email.value.trim() === '') {
+        showError(email, 'Email address is required');
+        isValid = false;
+      } else if (!isValidEmail(email.value.trim())) {
+        showError(email, 'Please enter a valid email address');
+        isValid = false;
+      } else {
+        showSuccess(email);
+      }
+
+      // Password validation
+      if (password.value === '') {
+        showError(password, 'Password is required');
+        isValid = false;
+      } else if (password.value.length < 6) {
+        showError(password, 'Password must be at least 6 characters');
+        isValid = false;
+      } else {
+        showSuccess(password);
+      }
+
+      // Confirm password validation
+      if (confirmPassword.value === '') {
+        showError(confirmPassword, 'Please confirm your password');
+        isValid = false;
+      } else if (password.value !== confirmPassword.value) {
+        showError(confirmPassword, 'Passwords do not match');
+        isValid = false;
+      } else if (password.value !== '') {
+        showSuccess(confirmPassword);
+      }
+
+      return isValid;
+    }
+
+    // Real-time input cleaning
+    [username, email, password, confirmPassword].forEach(input => {
+      input.addEventListener('input', () => {
+        if (input.parentElement.classList.contains('error')) {
+          input.parentElement.className = 'form-control';
+        }
+      });
+    });
+
+    // Form submit listener
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (validateForm()) {
+        alertBox.classList.add('show');
+        form.reset();
+
+        // Clear green borders after reset
+        const formControls = document.querySelectorAll('.form-control');
+        formControls.forEach(control => control.className = 'form-control');
+
+        // Hide success alert after 4 seconds
+        setTimeout(() => {
+          alertBox.classList.remove('show');
+        }, 4000);
+      } else {
+        alertBox.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
